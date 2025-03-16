@@ -15,13 +15,27 @@ jobs:
                 echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "narshi" --password-stdin
                 docker image build -t narshi/sample-node-app:v1 .
                 docker push narshi/sample-node-app:v1
-            - name: Installing heroku
+            - name: Login to Heroku CLI
+              uses: heroku/actions/heroku-login@v1
+              with:
+                  heroku_api_key: ${{ secrets.HEROKU_API_KEY }} # Heroku API key from secrets
+
+            - name: Build and Push Docker Image
               run: |
-                  npm install -g heroku
-                  heroku --version
-            - name: Deploy to Heroku
+                docker build -t registry.heroku.com/sample-node-app/web .
+                docker tag registry.heroku.com/sample-node-app/web registry.heroku.com/sample-node-app/web
+                docker push registry.heroku.com/sample-node-app/web
+
+            - name: Release Docker Image to Heroku
               run: |
-                echo "${{ secrets.HEROKU_API_KEY }}" | docker login -u "narshi" --password-stdin registry.heroku.com
-                heroku container:push web --app sample-node-app
                 heroku container:release web --app sample-node-app
+            # - name: Installing heroku
+            #   run: |
+            #       npm install -g heroku
+            #       heroku --version
+            # - name: Deploy to Heroku
+            #   run: |
+            #     echo "${{ secrets.HEROKU_API_KEY }}" | docker login -u "narshi" --password-stdin registry.heroku.com
+            #     heroku container:push web --app sample-node-app
+            #     heroku container:release web --app sample-node-app
                 
