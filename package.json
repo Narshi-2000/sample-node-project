@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo "successfully ran tests"
+    "test": "echo successfully ran tests"
   },
   "author": "Adem Cemil YALCIN",
   "license": "ISC",
