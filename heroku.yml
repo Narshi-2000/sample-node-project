@@ -1,0 +1,4 @@
+build:
+      dockerfile: Dockerfile
+    release:
+      command: "npm run start"  # Or your application's start command
