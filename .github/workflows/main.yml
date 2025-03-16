@@ -12,6 +12,6 @@ jobs:
               run: npm test
             - name: Build & Push docker image
               run: |
-                echo "${{ secrets.DOCKER_PASSWORD" }}" | docker login -u "narshi" --password-stdin
+                echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "narshi" --password-stdin
                 docker image build -t narshi/sample-node-app:v1 .
                 docker push narshi/sample-node-app:v1
