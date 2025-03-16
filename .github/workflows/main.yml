@@ -20,9 +20,11 @@ jobs:
               uses: docker/metadata-action@v4
               with:
                 images: narshi/sample-node-project
+                tags: type=semver,pattern={{version}}
             - name: Build and publish docker images
               uses: docker/build-push-action@v4
               with:
                 context: .
                 file: ./dockerfile
                 push: true
+                tags: ${{ steps.metadata.outputs.tag }}
