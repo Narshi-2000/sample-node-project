@@ -16,9 +16,9 @@ jobs:
                 docker image build -t narshi/sample-node-app:v1 .
                 docker push narshi/sample-node-app:v1
             - name: Login to Heroku CLI
-              uses: heroku/actions/heroku-login@v1
-              with:
-                  heroku_api_key: ${{ secrets.HEROKU_API_KEY }} # Heroku API key from secrets
+              env: 
+                HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+              run: heroku container:login 
 
             - name: Build and Push Docker Image
               run: |
