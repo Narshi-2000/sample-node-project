@@ -14,5 +14,5 @@ jobs:
               run: docker build -t narshi/sample-node-project .
             - name: Push docker image
               run: |
-                echo ${{ env.DOCKER_TOKEN }} | docker login --username ${{ env.DOCKER_USERNAME }} --password-stdin
+                echo ${{ DOCKER_PASSWORD }} | docker login -u ${{ DOCKER_USERNAME }} --password-stdin
                 docker push narshi/sample-node-project
