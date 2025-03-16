@@ -10,3 +10,9 @@ jobs:
               run: npm install
             - name: Run tests
               run: npm test
+            - name: Build docker image
+              run: docker build -t narshi/sample-node-project
+            - name: Push docker image
+              run: |
+                echo "${{secrets.PASSWORD}}" | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin
+                docker push narshi/sample-node-project
