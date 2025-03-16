@@ -15,6 +15,11 @@ jobs:
                 echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "narshi" --password-stdin
                 docker image build -t narshi/sample-node-app:v1 .
                 docker push narshi/sample-node-app:v1
+            - name: Installing heroku
+              run: |
+                  npm install -g heroku
+                  heroku --version
+                  
             - name: Deploy to Heroku
               run: |
                 heroku container:login
