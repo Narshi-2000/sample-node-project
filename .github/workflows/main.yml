@@ -22,7 +22,8 @@ jobs:
                   
             - name: Deploy to Heroku
               run: |
-                heroku login -e ${{ secrets.HEROKU_EMAIL }} -p ${{ secrets.HEROKU_API_KEY }}
-                heroku container:login -u "narshi" -p ${{ secrets.DOCKER_PASSWORD }}
-                heroku container:push web --app sample-node-app:v1
-                heroku container:release web --app sample-node-app:v1
+                  docker pull narshi/sample-node-app:v1
+                  docker tag narshi/sample-node-app:v1 regisry.heroku.com/sample-node-app/web
+                  docker push registry.heroku.com/sample-node-app/web
+                  heroku container:release web --app sample-node-app
+                
