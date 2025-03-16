@@ -21,8 +21,8 @@ jobs:
                   heroku --version
             - name: Deploy to Heroku
               run: |
-                  # docker pull narshi/sample-node-app:v1
-                  heroku container:login
-                  heroku container:push web --app sample-node-app:v1
-                  heroku container:release web --app sample-node-app:v1
+                echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "narshi" --password-stdin
+                heroku container:login
+                heroku container:push web --app sample-node-app:v1
+                heroku container:release web --app sample-node-app:v1
                 
