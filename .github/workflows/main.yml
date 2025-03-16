@@ -33,6 +33,7 @@ jobs:
             - name: Release Docker Image to Heroku
               run: |
                 heroku container:release web --app sample-node-app
+                heroku open
             # - name: Installing heroku
             #   run: |
             #       npm install -g heroku
