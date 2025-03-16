@@ -23,5 +23,6 @@ jobs:
             - name: Deploy to Heroku
               run: |
                 heroku login -e ${{ secrets.HEROKU_EMAIL }} -p ${{ secrets.HEROKU_API_KEY }}
-                heroku container:push web --app sample-node-app
-                heroku container:release web --app sample-node-app
+                heroku container:login -u "narshi" -p ${{ secrets.DOCKER_PASSWORD }}
+                heroku container:push web --app sample-node-app:v1
+                heroku container:release web --app sample-node-app:v1
